@@ -23,7 +23,7 @@
     },
     "imports": [
       {
-        "href": "https://raw.githubusercontent.com/khanssen/oscal-nist-sp-800-171r2/main/nist-sp-800-171r2-combined-catalog.json",
+        "href": "catalog/nist-sp-800-171r2-combined-catalog.json",
         "include-controls": [
           {
             "with-ids": [
@@ -159,7 +159,7 @@
           ],
           "rlinks": [
             {
-              "href": "nist-sp-800-171r2-combined-catalog.json",
+              "href": "catalog/nist-sp-800-171r2-combined-catalog.json",
               "media-type": "application/json"
             }
           ]
