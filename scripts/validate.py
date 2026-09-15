@@ -3,9 +3,20 @@
 assert the expected SP 800-171 Rev 2 counts. Mirrors the CI job."""
 import json, sys, urllib.request
 import jsonschema, regex
-import jsonschema._keywords as k
 
-k.re = regex  # OSCAL schema uses \p{} unicode classes
+# The OSCAL schema uses \p{...} Unicode classes, which Python's `re` cannot
+# parse. Point jsonschema's pattern checker at the `regex` module instead.
+# The module holding it has moved between jsonschema releases.
+_patched = False
+for _name in ("jsonschema._keywords", "jsonschema._validators"):
+    try:
+        _mod = __import__(_name, fromlist=["re"])
+        _mod.re = regex
+        _patched = True
+    except ImportError:
+        pass
+if not _patched:
+    sys.exit("could not patch jsonschema regex engine; jsonschema version unsupported")
 
 OSCAL_VERSION = "1.1.2"
 SCHEMA_URL = (f"https://github.com/usnistgov/OSCAL/releases/download/"
