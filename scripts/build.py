@@ -4,11 +4,15 @@
   sources/cprt_SP_800_171_2_0_0_*.json   NIST CPRT export of SP 800-171 Rev 2
                                           -> requirement statements, discussion,
                                              basic/derived type (AUTHORITATIVE)
+  sources/sp800-171a-extracted.json       extracted from the SP 800-171A PDF by
+                                          scripts/extract_171a.py
+                                          -> assessment objectives and Examine /
+                                             Interview / Test procedures (AUTHORITATIVE)
   sources/baseline-2025-11-19.json        internal baseline
-                                          -> OSCAL skeleton, SP 800-171A objectives
-                                             and assessment procedures
+                                          -> OSCAL skeleton (groups, control and part
+                                             ids, part layout) only
 
-Every repair applied to source text is listed in REPAIRS / ADDITIONS below so
+Every repair applied to source text is listed in HYPHEN_REPAIRS / repair_cprt_text below so
 it is visible in the diff of this file, never hidden in the output.
 """
 import json, re, sys, glob, datetime, pathlib
@@ -16,6 +20,7 @@ import json, re, sys, glob, datetime, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CPRT = sorted(glob.glob(str(ROOT / "sources/cprt_SP_800_171_2_0_0_*.json")))[-1]
 BASELINE = ROOT / "sources/baseline-2025-11-19.json"
+A171 = ROOT / "sources/sp800-171a-extracted.json"
 OUT = ROOT / "catalog/nist-sp-800-171r2-combined-catalog.json"
 VERSION = "2.0-combined.1"
 
@@ -32,26 +37,11 @@ def repair_cprt_text(s: str) -> str:
         s = s.replace(a, b)
     return s
 
-# --- repairs to baseline 171A text -------------------------------------------
-MOJIBAKE = {"â€™": "\u2019", "â€œ": "\u201c", "â€\x9d": "\u201d", "â€\u201d": "\u2014"}
-def repair_baseline_text(s: str) -> str:
-    for a, b in MOJIBAKE.items():
-        s = s.replace(a, b)
-    s = re.sub(r"\s{2,}", " ", s).strip()
-    if s and not s.endswith("."):
-        s += "."
-    return s
-
-# --- SP 800-171A content missing from the baseline ---------------------------
-# VERIFY AGAINST SP 800-171A PDF BEFORE FINAL RELEASE.
-ADDITIONS = {
-    "3.1.19": {"assessment":
-        "**EXAMINE:** [SELECT FROM: Access control policy; procedures addressing access control for mobile devices; system design documentation; system configuration settings and associated documentation; encryption mechanisms and associated configuration documentation; system audit logs and records; other relevant documents or records].\n"
-        "**INTERVIEW:** [SELECT FROM: Personnel with access control responsibilities for mobile devices; system or network administrators; personnel with information security responsibilities].\n"
-        "**TEST:** [SELECT FROM: Encryption mechanisms protecting confidentiality of information on mobile devices]."},
-    "3.6.3": {"assessment_append":
-        "\n**TEST:** [SELECT FROM: Mechanisms and processes for incident response]."},
-}
+def assessment_prose(a):
+    """Single markdown part, matching the baseline's layout."""
+    return (f"**EXAMINE:** {a['examine']}\n"
+            f"**INTERVIEW:** {a['interview']}\n"
+            f"**TEST:** {a['test']}")
 
 def label_of(cid):  # _03.01.01 -> 3.1.1
     return ".".join(str(int(x)) for x in cid.lstrip("_").split("."))
@@ -64,6 +54,9 @@ def main():
              for r in cprt["relationships"] if r["dest_element_identifier"].startswith("RT_")}
     assert len(stmt) == 110 and len(disc) == 110 and len(rtype) == 110
 
+    a171 = json.load(open(A171, encoding="utf-8"))["controls"]
+    assert len(a171) == 110 and sum(len(v["objectives"]) for v in a171.values()) == 320
+
     doc = json.load(open(BASELINE, encoding="utf-8"))
     cat = doc["catalog"]
     for g in cat["groups"]:
@@ -75,22 +68,12 @@ def main():
             props = [{"name": "label", "value": lab},
                      {"name": "sort-id", "value": cid.lstrip("_")},
                      {"name": "requirement-type", "ns": "https://archstonesecurity.com/ns/oscal", "value": rtype[lab]}]
-            parts = []
-            for p in c["parts"]:
-                if p["name"] == "statement":
-                    p["prose"] = s
-                elif p["name"] == "guidance":
-                    p["prose"] = d
-                else:
-                    p["prose"] = repair_baseline_text(p["prose"])
-                parts.append(p)
-            add = ADDITIONS.get(lab, {})
-            if "assessment" in add and not any(p["name"] == "assessment" for p in parts):
-                parts.append({"name": "assessment", "prose": add["assessment"]})
-            if "assessment_append" in add:
-                for p in parts:
-                    if p["name"] == "assessment" and "**TEST:**" not in p["prose"]:
-                        p["prose"] = p["prose"].rstrip() + add["assessment_append"]
+            a = a171[lab]
+            parts = [{"id": f"{cid}_smt", "name": "statement", "prose": s},
+                     {"id": f"{cid}_disc", "name": "guidance", "prose": d}]
+            for letter, text in a["objectives"].items():
+                parts.append({"id": f"{cid}_obj.{letter}", "name": "objective", "prose": text})
+            parts.append({"name": "assessment", "prose": assessment_prose(a)})
             c.clear()
             c.update({"id": cid, "title": s, "props": props, "parts": parts})
 

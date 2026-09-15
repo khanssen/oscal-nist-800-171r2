@@ -48,9 +48,10 @@ Each control carries:
 - `statement` — the requirement text, verbatim from SP 800-171 Rev 2
 - `guidance` — the Discussion text, verbatim (including NIST's own typographical
   errors, which are preserved deliberately)
-- `objective` parts, `a` through `n` as applicable — the 800-171A determination
-  statements
-- `assessment` — Examine / Interview / Test with the 800-171A "SELECT FROM" lists
+- `objective` parts, `a` through `o` as applicable — the 800-171A determination
+  statements, verbatim from the PDF
+- `assessment` — Examine / Interview / Test with the 800-171A "SELECT FROM" lists,
+  verbatim from the PDF
 - `props`: `label` (`3.1.1`), `sort-id` (`03.01.01`), and `requirement-type`
   (`basic` or `derived`, in the Archstone namespace)
 
@@ -71,7 +72,9 @@ a digit). Use the `label` prop when you want the human-readable `3.1.1` form.
 The catalog is generated, not hand-edited:
 
 ```
-sources/   NIST CPRT export of SP 800-171 Rev 2 (as downloaded) + frozen internal baseline
+sources/   NIST CPRT export of SP 800-171 Rev 2 (as downloaded)
+           NIST SP 800-171A PDF + its extracted text (scripts/extract_171a.py)
+           frozen internal baseline (OSCAL skeleton only)
 scripts/   build.py -> catalog/   diff_baseline.py -> CORRECTIONS.md   diff_cprt.py -> DIFFERENCES.md
 ```
 
@@ -92,13 +95,13 @@ python scripts/validate.py catalog/nist-sp-800-171r2-combined-catalog.json
 NIST does not publish SP 800-171 Rev 2 in OSCAL. The CPRT export of Rev 2
 contains the requirement statements and discussion text but none of the
 SP 800-171A assessment objectives or procedures, and carries PDF-extraction
-artifacts (collapsed paragraph breaks, broken hyphenation). NIST's OSCAL
-content covers Rev 3, which is a different requirement set. Rev 2 is what
-CMMC Level 2 is assessed against.
+artifacts (collapsed paragraph breaks, broken hyphenation). SP 800-171A itself
+exists only as a PDF. NIST's OSCAL content covers Rev 3, which is a different
+requirement set. Rev 2 is what CMMC Level 2 is assessed against.
 
-This catalog takes the CPRT Rev 2 text as authoritative, repairs the
-extraction artifacts, adds the full 800-171A content, and ships the result as
-a schema-valid OSCAL catalog with a signed provenance attestation.
+This catalog takes the CPRT Rev 2 text and the 800-171A PDF text as
+authoritative, repairs the extraction artifacts, combines them, and ships the
+result as a schema-valid OSCAL catalog with a signed provenance attestation.
 
 - [DIFFERENCES.md](DIFFERENCES.md) — mechanical comparison against the CPRT
   Rev 2 export, including what CPRT does and does not contain.

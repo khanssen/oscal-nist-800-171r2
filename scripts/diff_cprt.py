@@ -19,6 +19,21 @@ for g in B["catalog"]["groups"]:
 mismatch = [k for k in stmt if stmt[k].strip() != mine[k][0] or repair_cprt_text(disc[k]) != mine[k][1]]
 assert not mismatch, f"catalog text diverges from CPRT after repair: {mismatch}"
 
+# --- SP 800-171A layer: assert catalog == extracted PDF text -----------------
+E = json.load(open(ROOT / "sources/sp800-171a-extracted.json", encoding="utf-8"))
+a171 = E["controls"]
+bad = []
+for g in B["catalog"]["groups"]:
+    for c in g["controls"]:
+        lab = next(p["value"] for p in c["props"] if p["name"] == "label")
+        objs = [(p["id"].rsplit("_obj.", 1)[-1], p["prose"]) for p in c["parts"] if p["name"] == "objective"]
+        if objs != list(a171[lab]["objectives"].items()): bad.append(lab + " objectives")
+        a = next(p["prose"] for p in c["parts"] if p["name"] == "assessment")
+        m = re.fullmatch(r"\*\*EXAMINE:\*\* (.*)\n\*\*INTERVIEW:\*\* (.*)\n\*\*TEST:\*\* (.*)", a, re.S)
+        if not m or list(m.groups()) != [a171[lab]["examine"], a171[lab]["interview"], a171[lab]["test"]]: bad.append(lab + " procedure")
+assert not bad, f"catalog 800-171A text diverges from extracted PDF: {bad}"
+stmt_vs_171a = [k for k in stmt if re.sub(r"\s+", " ", stmt[k]).strip() != a171[k]["statement"]]
+
 runon = {k: len(re.findall(r"[a-z\)0-9]\.[A-Z]", v)) for k, v in disc.items()}
 runon = {k: v for k, v in runon.items() if v}
 orph = [(k, m) for k, v in disc.items() for m in re.findall(r"\w+- \w+|point-oforigin|cloudbased", v) if m != "identity- or"]
@@ -65,9 +80,15 @@ This catalog's requirement statements and discussion text are taken verbatim fro
 
 Recorded for transparency: comparing against CPRT exposed errors in the pre-release baseline that schema validation had not caught — one requirement carrying the wrong text (3.13.12 had 3.13.11's statement and discussion), two truncated parentheticals (3.13.6, 3.13.7), and three statements using Rev 1 wording (3.1.21, 3.2.2, 3.5.4). All are fixed by building from the CPRT text. See CORRECTIONS.md.
 
-## Not yet verified against a NIST machine-readable source
+## SP 800-171A: assessment objectives and procedures
 
-The 320 assessment objectives and 110 assessment procedures (SP 800-171A) are internally consistent and count-correct but have not been diffed against a NIST export. This section will be replaced when that comparison is done.
+NIST publishes no machine-readable SP 800-171A for Rev 2 — not in CPRT, not in OSCAL. The only source is the PDF (`sources/NIST.SP.800-171A.pdf`, SHA-256 `{E["source"]["sha256"][:16]}…`). `scripts/extract_171a.py` extracts all 320 determination statements and 110 Examine / Interview / Test procedures from it with `pdftotext -raw`, asserts the counts and letter sequences, and records every end-of-line hyphen join for review ({len(E["hyphen_joins"])} in total: {", ".join(sorted(set(h["text"] for h in E["hyphen_joins"])))}). The extracted text is committed as `sources/sp800-171a-extracted.json`; this script asserts on every build that the catalog's 320 objectives and 110 procedures match it exactly.
+
+**Requirement text in SP 800-171A vs. CPRT.** The 800-171A PDF (2018) repeats each requirement statement. {len(stmt_vs_171a)} differ from the CPRT Rev 2 text: {", ".join(stmt_vs_171a)} — a comma in 3.3.2 and "non-privileged" vs "nonprivileged" in 3.5.4. The catalog uses the CPRT (SP 800-171 Rev 2) text for statements; 800-171A is used only for objectives and procedures.
+
+### What the 800-171A comparison found in this catalog's own baseline
+
+The pre-release baseline's assessment layer was not verbatim SP 800-171A. Against the PDF: 58 of 320 objectives and 157 of 330 procedure texts differed, and one procedure (3.1.19) and one TEST (3.6.3) were absent. The dominant patterns were "security plan" where 800-171A reads "system security plan" (78 procedures); the 23 single-objective requirements carrying the requirement statement itself rather than the 800-171A determination statement; CUI-scoped rewording of the 3.11.2 objectives; 3.1.17's two objectives swapped; and several Examine lists with items added or dropped. All are replaced by the extracted PDF text in 2.0-combined.1. See CORRECTIONS.md.
 """
 (ROOT / "DIFFERENCES.md").write_text(D, encoding="utf-8")
 print("DIFFERENCES.md written; catalog text matches CPRT after repair (110/110)")

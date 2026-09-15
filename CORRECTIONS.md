@@ -4,98 +4,262 @@ Field-level diff between the internal baseline and the built catalog, generated 
 
 **Structural additions (all 110 controls):** `label`, `sort-id`, and `requirement-type` (basic/derived) props; `class: family` on every group.
 
-**Content additions:** 3.1.19 assessment procedure (Examine/Interview/Test) and 3.6.3 TEST procedure, both per SP 800-171A.
+**SP 800-171A layer:** every assessment objective and procedure is now taken from the SP 800-171A PDF (`sources/sp800-171a-extracted.json`). Rows below marked 'replaced with SP 800-171A text' are fields whose baseline wording differed from the PDF; identical fields are not listed. This includes 3.1.19's previously missing procedure and 3.6.3's previously missing TEST.
 
 | Control | Field | Change |
 |---|---|---|
+| 3.1.1 | obj.c | replaced with SP 800-171A text |
+| 3.1.1 | assessment | replaced with SP 800-171A text |
 | 3.1.1 | statement | truncated text restored |
 | 3.1.1 | title | truncated text restored |
-| 3.1.2 | obj.a | terminal period |
+| 3.1.2 | obj.a | replaced with SP 800-171A text |
+| 3.1.2 | assessment | replaced with SP 800-171A text |
 | 3.1.3 | disc | paragraph spacing |
-| 3.1.4 | obj.c | terminal period |
+| 3.1.3 | obj.c | replaced with SP 800-171A text |
+| 3.1.3 | assessment | replaced with SP 800-171A text |
+| 3.1.4 | obj.a | replaced with SP 800-171A text |
+| 3.1.4 | obj.b | replaced with SP 800-171A text |
+| 3.1.4 | obj.c | replaced with SP 800-171A text |
+| 3.1.4 | assessment | replaced with SP 800-171A text |
 | 3.1.5 | disc | paragraph spacing |
+| 3.1.5 | assessment | replaced with SP 800-171A text |
+| 3.1.6 | assessment | replaced with SP 800-171A text |
 | 3.1.7 | disc | text changed |
+| 3.1.7 | assessment | replaced with SP 800-171A text |
 | 3.1.8 | disc | double space |
-| 3.1.9 | obj.a | terminal period |
+| 3.1.8 | assessment | replaced with SP 800-171A text |
+| 3.1.9 | obj.a | replaced with SP 800-171A text |
+| 3.1.9 | assessment | replaced with SP 800-171A text |
 | 3.1.10 | disc | paragraph spacing |
+| 3.1.10 | assessment | replaced with SP 800-171A text |
 | 3.1.11 | disc | encoding repaired (curly quotes restored) |
+| 3.1.11 | assessment | replaced with SP 800-171A text |
 | 3.1.11 | statement | parentheses restored |
 | 3.1.11 | title | parentheses restored |
 | 3.1.12 | disc | paragraph spacing |
+| 3.1.12 | assessment | replaced with SP 800-171A text |
+| 3.1.13 | assessment | replaced with SP 800-171A text |
+| 3.1.14 | assessment | replaced with SP 800-171A text |
+| 3.1.15 | assessment | replaced with SP 800-171A text |
+| 3.1.16 | obj.b | replaced with SP 800-171A text |
+| 3.1.16 | assessment | replaced with SP 800-171A text |
+| 3.1.17 | obj.a | replaced with SP 800-171A text |
+| 3.1.17 | obj.b | replaced with SP 800-171A text |
+| 3.1.17 | assessment | replaced with SP 800-171A text |
 | 3.1.18 | disc | paragraph spacing |
+| 3.1.18 | obj.b | replaced with SP 800-171A text |
+| 3.1.18 | assessment | replaced with SP 800-171A text |
 | 3.1.19 | assessment | added (SP 800-171A) |
 | 3.1.20 | disc | encoding repaired (curly quotes restored), paragraph spacing |
+| 3.1.20 | obj.b | replaced with SP 800-171A text |
+| 3.1.20 | obj.d | replaced with SP 800-171A text |
+| 3.1.20 | obj.f | replaced with SP 800-171A text |
+| 3.1.20 | assessment | replaced with SP 800-171A text |
 | 3.1.21 | disc | encoding repaired (curly quotes restored), double space |
+| 3.1.21 | obj.a | replaced with SP 800-171A text |
+| 3.1.21 | obj.b | replaced with SP 800-171A text |
+| 3.1.21 | obj.c | replaced with SP 800-171A text |
+| 3.1.21 | assessment | replaced with SP 800-171A text |
 | 3.1.21 | statement | Rev 1 wording; replaced with Rev 2 |
 | 3.1.21 | title | Rev 1 wording; replaced with Rev 2 |
+| 3.1.22 | obj.c | replaced with SP 800-171A text |
+| 3.1.22 | obj.d | replaced with SP 800-171A text |
+| 3.1.22 | assessment | replaced with SP 800-171A text |
+| 3.2.1 | assessment | replaced with SP 800-171A text |
 | 3.2.2 | disc | paragraph spacing |
+| 3.2.2 | assessment | replaced with SP 800-171A text |
 | 3.2.2 | statement | Rev 1 wording; replaced with Rev 2 |
 | 3.2.2 | title | Rev 1 wording; replaced with Rev 2 |
+| 3.2.3 | assessment | replaced with SP 800-171A text |
 | 3.3.1 | disc | paragraph spacing, hyphenation |
+| 3.3.1 | assessment | replaced with SP 800-171A text |
+| 3.3.2 | assessment | replaced with SP 800-171A text |
 | 3.3.2 | statement | comma restored |
 | 3.3.2 | title | comma restored |
+| 3.3.3 | assessment | replaced with SP 800-171A text |
+| 3.3.4 | assessment | replaced with SP 800-171A text |
+| 3.3.5 | assessment | replaced with SP 800-171A text |
+| 3.3.6 | assessment | replaced with SP 800-171A text |
+| 3.3.7 | obj.a | replaced with SP 800-171A text |
+| 3.3.7 | assessment | replaced with SP 800-171A text |
+| 3.3.8 | assessment | replaced with SP 800-171A text |
+| 3.3.9 | obj.b | replaced with SP 800-171A text |
+| 3.3.9 | assessment | replaced with SP 800-171A text |
+| 3.4.1 | assessment | replaced with SP 800-171A text |
 | 3.4.1 | statement | truncated text restored |
 | 3.4.1 | title | truncated text restored |
 | 3.4.2 | disc | paragraph spacing |
+| 3.4.2 | assessment | replaced with SP 800-171A text |
 | 3.4.3 | disc | paragraph spacing |
+| 3.4.3 | assessment | replaced with SP 800-171A text |
+| 3.4.4 | obj.a | replaced with SP 800-171A text |
+| 3.4.4 | assessment | replaced with SP 800-171A text |
 | 3.4.5 | disc | paragraph spacing |
+| 3.4.5 | assessment | replaced with SP 800-171A text |
 | 3.4.6 | disc | paragraph spacing |
+| 3.4.6 | assessment | replaced with SP 800-171A text |
+| 3.4.7 | assessment | replaced with SP 800-171A text |
+| 3.4.8 | assessment | replaced with SP 800-171A text |
 | 3.4.8 | statement | truncated text restored |
 | 3.4.8 | title | truncated text restored |
 | 3.4.9 | disc | encoding repaired (curly quotes restored) |
+| 3.4.9 | assessment | replaced with SP 800-171A text |
+| 3.5.1 | assessment | replaced with SP 800-171A text |
 | 3.5.2 | disc | paragraph spacing |
+| 3.5.2 | assessment | replaced with SP 800-171A text |
 | 3.5.2 | statement | parentheses restored |
 | 3.5.2 | title | parentheses restored |
 | 3.5.3 | disc | paragraph spacing |
+| 3.5.3 | assessment | replaced with SP 800-171A text |
+| 3.5.4 | obj.a | replaced with SP 800-171A text |
+| 3.5.4 | assessment | replaced with SP 800-171A text |
 | 3.5.4 | statement | Rev 1 wording; replaced with Rev 2 |
 | 3.5.4 | title | Rev 1 wording; replaced with Rev 2 |
+| 3.5.5 | obj.a | replaced with SP 800-171A text |
+| 3.5.5 | assessment | replaced with SP 800-171A text |
+| 3.5.6 | assessment | replaced with SP 800-171A text |
+| 3.5.7 | assessment | replaced with SP 800-171A text |
+| 3.5.8 | assessment | replaced with SP 800-171A text |
+| 3.5.9 | obj.a | replaced with SP 800-171A text |
+| 3.5.9 | assessment | replaced with SP 800-171A text |
 | 3.5.9 | statement | terminal period |
 | 3.5.9 | title | terminal period |
+| 3.5.10 | assessment | replaced with SP 800-171A text |
+| 3.5.11 | obj.a | replaced with SP 800-171A text |
+| 3.5.11 | assessment | replaced with SP 800-171A text |
 | 3.6.1 | disc | paragraph spacing |
+| 3.6.1 | assessment | replaced with SP 800-171A text |
 | 3.6.2 | disc | paragraph spacing |
-| 3.6.3 | assessment | text changed |
+| 3.6.2 | assessment | replaced with SP 800-171A text |
+| 3.6.3 | obj.a | replaced with SP 800-171A text |
+| 3.6.3 | assessment | replaced with SP 800-171A text |
+| 3.7.1 | obj.a | replaced with SP 800-171A text |
+| 3.7.1 | assessment | replaced with SP 800-171A text |
+| 3.7.2 | assessment | replaced with SP 800-171A text |
 | 3.7.3 | disc | hyphenation |
+| 3.7.3 | obj.a | replaced with SP 800-171A text |
+| 3.7.3 | assessment | replaced with SP 800-171A text |
+| 3.7.4 | obj.a | replaced with SP 800-171A text |
+| 3.7.4 | assessment | replaced with SP 800-171A text |
 | 3.7.4 | statement | terminal period |
 | 3.7.4 | title | terminal period |
+| 3.7.5 | obj.a | replaced with SP 800-171A text |
+| 3.7.5 | assessment | replaced with SP 800-171A text |
+| 3.7.6 | obj.a | replaced with SP 800-171A text |
+| 3.7.6 | assessment | replaced with SP 800-171A text |
 | 3.8.1 | disc | paragraph spacing |
+| 3.8.1 | assessment | replaced with SP 800-171A text |
 | 3.8.1 | statement | parentheses restored |
 | 3.8.1 | title | parentheses restored |
+| 3.8.2 | obj.a | replaced with SP 800-171A text |
+| 3.8.2 | assessment | replaced with SP 800-171A text |
 | 3.8.3 | disc | paragraph spacing |
+| 3.8.3 | obj.b | replaced with SP 800-171A text |
+| 3.8.3 | assessment | replaced with SP 800-171A text |
+| 3.8.4 | assessment | replaced with SP 800-171A text |
+| 3.8.5 | assessment | replaced with SP 800-171A text |
+| 3.8.6 | obj.a | replaced with SP 800-171A text |
+| 3.8.6 | assessment | replaced with SP 800-171A text |
 | 3.8.7 | disc | paragraph spacing |
+| 3.8.7 | obj.a | replaced with SP 800-171A text |
+| 3.8.7 | assessment | replaced with SP 800-171A text |
+| 3.8.8 | obj.a | replaced with SP 800-171A text |
+| 3.8.8 | assessment | replaced with SP 800-171A text |
+| 3.8.9 | obj.a | replaced with SP 800-171A text |
+| 3.8.9 | assessment | replaced with SP 800-171A text |
 | 3.9.1 | disc | encoding repaired (curly quotes restored) |
+| 3.9.1 | obj.a | replaced with SP 800-171A text |
+| 3.9.1 | assessment | replaced with SP 800-171A text |
 | 3.9.2 | disc | paragraph spacing |
+| 3.9.2 | obj.a | replaced with SP 800-171A text |
+| 3.9.2 | assessment | replaced with SP 800-171A text |
 | 3.10.1 | disc | paragraph spacing |
+| 3.10.1 | assessment | replaced with SP 800-171A text |
+| 3.10.2 | obj.a | replaced with SP 800-171A text |
+| 3.10.2 | obj.b | replaced with SP 800-171A text |
+| 3.10.2 | obj.c | replaced with SP 800-171A text |
+| 3.10.2 | obj.d | replaced with SP 800-171A text |
+| 3.10.2 | assessment | replaced with SP 800-171A text |
+| 3.10.3 | assessment | replaced with SP 800-171A text |
+| 3.10.4 | obj.a | replaced with SP 800-171A text |
+| 3.10.4 | assessment | replaced with SP 800-171A text |
+| 3.10.5 | assessment | replaced with SP 800-171A text |
+| 3.10.6 | assessment | replaced with SP 800-171A text |
+| 3.11.1 | assessment | replaced with SP 800-171A text |
 | 3.11.1 | statement | truncated text restored |
 | 3.11.1 | title | truncated text restored |
 | 3.11.2 | disc | paragraph spacing |
+| 3.11.2 | obj.a | replaced with SP 800-171A text |
+| 3.11.2 | obj.b | replaced with SP 800-171A text |
+| 3.11.2 | obj.c | replaced with SP 800-171A text |
+| 3.11.2 | obj.d | replaced with SP 800-171A text |
+| 3.11.2 | obj.e | replaced with SP 800-171A text |
+| 3.11.2 | assessment | replaced with SP 800-171A text |
+| 3.11.3 | assessment | replaced with SP 800-171A text |
 | 3.12.1 | disc | paragraph spacing |
+| 3.12.1 | assessment | replaced with SP 800-171A text |
 | 3.12.2 | disc | paragraph spacing |
+| 3.12.2 | assessment | replaced with SP 800-171A text |
 | 3.12.2 | statement | terminal period |
 | 3.12.2 | title | terminal period |
 | 3.12.3 | disc | paragraph spacing |
+| 3.12.3 | obj.a | replaced with SP 800-171A text |
+| 3.12.3 | assessment | replaced with SP 800-171A text |
 | 3.12.4 | disc | paragraph spacing |
+| 3.12.4 | assessment | replaced with SP 800-171A text |
 | 3.13.1 | disc | paragraph spacing |
+| 3.13.1 | assessment | replaced with SP 800-171A text |
 | 3.13.1 | statement | truncated text restored |
 | 3.13.1 | title | truncated text restored |
+| 3.13.2 | obj.e | replaced with SP 800-171A text |
+| 3.13.2 | assessment | replaced with SP 800-171A text |
+| 3.13.3 | assessment | replaced with SP 800-171A text |
+| 3.13.4 | obj.a | replaced with SP 800-171A text |
+| 3.13.4 | assessment | replaced with SP 800-171A text |
+| 3.13.5 | assessment | replaced with SP 800-171A text |
+| 3.13.6 | assessment | replaced with SP 800-171A text |
 | 3.13.6 | statement | truncated text restored |
 | 3.13.6 | title | truncated text restored |
+| 3.13.7 | obj.a | replaced with SP 800-171A text |
+| 3.13.7 | assessment | replaced with SP 800-171A text |
 | 3.13.7 | statement | truncated text restored |
 | 3.13.7 | title | truncated text restored |
+| 3.13.8 | assessment | replaced with SP 800-171A text |
+| 3.13.9 | assessment | replaced with SP 800-171A text |
 | 3.13.10 | disc | double space |
+| 3.13.10 | assessment | replaced with SP 800-171A text |
+| 3.13.11 | obj.a | replaced with SP 800-171A text |
+| 3.13.11 | assessment | replaced with SP 800-171A text |
 | 3.13.12 | disc | **wrong discussion text** (carried 3.13.11); replaced |
-| 3.13.12 | assessment | double space |
+| 3.13.12 | obj.c | replaced with SP 800-171A text |
+| 3.13.12 | assessment | replaced with SP 800-171A text |
 | 3.13.12 | statement | **wrong requirement text** (carried 3.13.11); replaced |
 | 3.13.12 | title | **wrong requirement text** (carried 3.13.11); replaced |
+| 3.13.13 | assessment | replaced with SP 800-171A text |
+| 3.13.14 | assessment | replaced with SP 800-171A text |
 | 3.13.14 | statement | truncated text restored |
 | 3.13.14 | title | truncated text restored |
+| 3.13.15 | obj.a | replaced with SP 800-171A text |
+| 3.13.15 | assessment | replaced with SP 800-171A text |
 | 3.13.15 | statement | terminal period |
 | 3.13.15 | title | terminal period |
+| 3.13.16 | obj.a | replaced with SP 800-171A text |
+| 3.13.16 | assessment | replaced with SP 800-171A text |
 | 3.14.1 | disc | paragraph spacing |
+| 3.14.1 | assessment | replaced with SP 800-171A text |
 | 3.14.2 | disc | paragraph spacing |
+| 3.14.2 | assessment | replaced with SP 800-171A text |
 | 3.14.3 | disc | encoding repaired (curly quotes restored) |
+| 3.14.3 | assessment | replaced with SP 800-171A text |
+| 3.14.4 | obj.a | replaced with SP 800-171A text |
+| 3.14.4 | assessment | replaced with SP 800-171A text |
+| 3.14.5 | assessment | replaced with SP 800-171A text |
 | 3.14.6 | disc | paragraph spacing |
+| 3.14.6 | obj.c | replaced with SP 800-171A text |
+| 3.14.6 | assessment | replaced with SP 800-171A text |
 | 3.14.6 | statement | terminal period |
 | 3.14.6 | title | terminal period |
 | 3.14.7 | disc | paragraph spacing, double space |
+| 3.14.7 | assessment | replaced with SP 800-171A text |
 
-_Trailing-whitespace-only changes (1 fields) omitted._
+_Trailing-whitespace-only changes (0 fields) omitted._
