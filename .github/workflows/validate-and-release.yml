@@ -53,7 +53,7 @@ jobs:
       - name: Stage release artifact
         run: |
           mkdir -p dist
-          cp "$CATALOG" dist/
+          cp "$CATALOG" "$PROFILE" dist/
           (cd dist && sha256sum *.json > SHA256SUMS)
 
       - name: Attest build provenance
