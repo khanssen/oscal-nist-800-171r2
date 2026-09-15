@@ -1,0 +1,67 @@
+name: Validate and Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  OSCAL_VERSION: "1.1.2"
+  CATALOG: catalog/nist-sp-800-171r2-combined-catalog.json
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install deps
+        run: pip install -q jsonschema regex
+
+      - name: Rebuild catalog and generated docs from sources
+        run: |
+          python scripts/build.py
+          python scripts/diff_baseline.py
+          python scripts/diff_cprt.py
+
+      - name: Fail if committed outputs drift from what sources produce
+        run: |
+          git diff --exit-code -- catalog/ CORRECTIONS.md DIFFERENCES.md \
+            || { echo "::error::catalog or generated docs differ from build output. Run the scripts and commit."; exit 1; }
+
+      - name: Validate against official OSCAL schema and assert counts
+        run: python scripts/validate.py "$CATALOG"
+
+  release:
+    needs: validate
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stage release artifact
+        run: |
+          mkdir -p dist
+          cp "$CATALOG" dist/
+          (cd dist && sha256sum *.json > SHA256SUMS)
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: dist/*.json
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.json
+            dist/SHA256SUMS
+          generate_release_notes: true

@@ -1,0 +1,40 @@
+NIST SP 800-171 Rev 2 Combined OSCAL Catalog
+Copyright (c) 2026 Archstone Security LLC
+
+This work is licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0).
+
+You are free to:
+  Share  — copy and redistribute the material in any medium or format
+  Adapt  — remix, transform, and build upon the material for any purpose,
+           even commercially
+
+Under the following terms:
+  Attribution — You must give appropriate credit, provide a link to the
+  license, and indicate if changes were made. You may do so in any
+  reasonable manner, but not in any way that suggests the licensor
+  endorses you or your use.
+
+No additional restrictions — You may not apply legal terms or
+technological measures that legally restrict others from doing anything
+the license permits.
+
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+---------------------------------------------------------------------
+
+NOTICE
+
+The requirement statements, discussion text, assessment objectives, and
+assessment procedures reproduced in this catalog are taken from NIST
+Special Publication 800-171 Revision 2 and NIST Special Publication
+800-171A, works of the United States Government not subject to copyright
+in the United States (17 U.S.C. § 105). The CC BY 4.0 license above
+applies only to the OSCAL structure, the combined arrangement, the
+identifier scheme, the corrections, and the curation contributed by
+Archstone Security LLC. Nothing in this license restricts use of the
+underlying NIST text.
+
+ARCHSTONE SECURITY and COMPLIANCE AS INFRASTRUCTURE are trademarks of
+Archstone Security LLC. This license does not grant permission to use
+these trademarks.
