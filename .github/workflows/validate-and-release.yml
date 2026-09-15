@@ -12,6 +12,7 @@ permissions:
 env:
   OSCAL_VERSION: "1.1.2"
   CATALOG: catalog/nist-sp-800-171r2-combined-catalog.json
+  PROFILE: nist-sp-800-171r2-profile.json
 
 jobs:
   validate:
@@ -35,6 +36,8 @@ jobs:
 
       - name: Validate against official OSCAL schema and assert counts
         run: python scripts/validate.py "$CATALOG"
+      - name: Validate profile and resolve its import
+        run: python scripts/validate_profile.py "$PROFILE"
 
   release:
     needs: validate
