@@ -1,4 +1,4 @@
-# NIST SP 800-171 Rev 2 — Combined OSCAL Catalog
+# NIST SP 800-171 Rev 2 - Combined OSCAL Catalog
 
 A single OSCAL 1.1.2 catalog containing all 110 security requirements from
 **NIST SP 800-171 Revision 2** together with the 320 assessment objectives and
@@ -45,12 +45,12 @@ gh attestation verify nist-sp-800-171r2-combined-catalog.json --owner khanssen \
 
 Each control carries:
 
-- `statement` — the requirement text, verbatim from SP 800-171 Rev 2
-- `guidance` — the Discussion text, verbatim (including NIST's own typographical
+- `statement` - the requirement text, verbatim from SP 800-171 Rev 2
+- `guidance` - the Discussion text, verbatim (including NIST's own typographical
   errors, which are preserved deliberately)
 - `objective` parts, `a` through `n` as applicable — the 800-171A determination
   statements
-- `assessment` — Examine / Interview / Test with the 800-171A "SELECT FROM" lists
+- `assessment` - Examine / Interview / Test with the 800-171A "SELECT FROM" lists
 - `props`: `label` (`3.1.1`), `sort-id` (`03.01.01`), and `requirement-type`
   (`basic` or `derived`, in the Archstone namespace)
 
