@@ -46,7 +46,7 @@ gh attestation verify nist-sp-800-171r2-combined-catalog.json --owner khanssen \
 Each control carries:
 
 - `statement` - the requirement text, verbatim from SP 800-171 Rev 2
-- `guidance` - the Discussion text, verbatim (including NIST's own typographical
+- `guidance` - the Discussion text, verbatim (including any of NIST's own typographical
   errors, which are preserved deliberately)
 <<<<<<< HEAD
 - `objective` parts, `a` through `o` as applicable — the 800-171A determination
